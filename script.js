@@ -155,15 +155,11 @@ function updateConfig() {
 }
 
 function generateURL() {
-    // Use LAN IP for mobile access if available, else fallback to host
     let baseURL = `${window.location.protocol}//${window.location.host}/wallpaper`;
 
-    if (serverIp && window.location.hostname === 'localhost') {
-        // If we are on localhost but know the LAN IP, use it
-        baseURL = `${window.location.protocol}//${serverIp}:${window.location.port}/wallpaper`;
-    } else if (serverIp && window.location.hostname !== 'localhost') {
-        // If we are already on LAN IP, use window.location
-        // or just force serverIp to be safe
+    // Use LAN IP for mobile access if available AND we are on localhost
+    const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    if (isLocal && serverIp) {
         baseURL = `${window.location.protocol}//${serverIp}:${window.location.port}/wallpaper`;
     }
 
@@ -292,7 +288,7 @@ function draw() {
     ctx.font = `${config.width * 0.04}px ${config.font}`;
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText(`${percentage.toFixed(1)}%`, config.width / 2, config.height - (config.marginBottom / 2));
+    ctx.fillText(`${percentage.toFixed(1)}%`, config.width / 2, config.height - (config.marginBottom / 1.5));
 
     // Grid Logic
     const gridX = config.marginSide;

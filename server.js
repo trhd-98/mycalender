@@ -2,7 +2,7 @@ const express = require('express');
 const puppeteer = require('puppeteer');
 const path = require('path');
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 const os = require('os');
 
@@ -39,7 +39,16 @@ app.get('/wallpaper', async (req, res) => {
     try {
         browser = await puppeteer.launch({
             headless: "new",
-            args: ['--no-sandbox', '--disable-setuid-sandbox']
+            args: [
+                '--no-sandbox',
+                '--disable-setuid-sandbox',
+                '--disable-dev-shm-usage',
+                '--disable-accelerated-2d-canvas',
+                '--no-first-run',
+                '--no-zygote',
+                '--single-process'
+            ],
+            executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || null
         });
         const page = await browser.newPage();
 
