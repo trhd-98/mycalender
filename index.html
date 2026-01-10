@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Life Calendar</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts for premium look -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@400;700&family=Space+Mono:wght@400;700&family=Outfit:wght@200;400;600&family=Raleway:wght@200;400;600&family=Montserrat:wght@200;400;600&family=Poppins:wght@200;400;600&family=Roboto:wght@300;400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <div id="controls" class="control-panel">
+        <h2>Configuration</h2>
+        <div class="input-group">
+            <label>Year</label>
+            <input type="number" id="yearInput" value="2026">
+        </div>
+        <div class="input-group">
+            <label>Dots per Row (Cols)</label>
+            <input type="number" id="colsInput" value="15">
+        </div>
+        <div class="input-group">
+            <label>Font</label>
+            <select id="fontSelect">
+                <option value="'Outfit', sans-serif">Minimal (Outfit)</option>
+                <option value="'Raleway', sans-serif">Thin (Raleway)</option>
+                <option value="'Montserrat', sans-serif">Clean (Montserrat)</option>
+                <option value="'Poppins', sans-serif">Rounded (Poppins)</option>
+                <option value="'Roboto', sans-serif">Classic (Roboto)</option>
+                <option value="'Inter', sans-serif">Modern (Inter)</option>
+                <option value="'Playfair Display', serif">Elegant (Playfair)</option>
+                <option value="'Space Mono', monospace">Tech (Space Mono)</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <label>Resolution</label>
+            <select id="resSelect">
+                <!-- iPhone 14/15 Pro Max logic approximately -->
+                <option value="1290x2796" selected>iPhone Pro Max (1290x2796)</option>
+                <option value="1179x2556">iPhone Pro (1179x2556)</option>
+                <option value="1920x1080">Desktop (1920x1080)</option>
+                <option value="3840x2160">4K (3840x2160)</option>
+            </select>
+        </div>
+
+        <div class="section-title">Margins</div>
+        <div class="input-group">
+            <label>Top (px)</label>
+            <input type="number" id="marginTop" value="1300" title="Space for Clock/Widgets">
+        </div>
+        <div class="input-group">
+            <label>Side (px)</label>
+            <input type="number" id="marginSide" value="40">
+        </div>
+        <div class="input-group">
+            <label>Bottom (px)</label>
+            <input type="number" id="marginBottom" value="150" title="Space for Percentage">
+        </div>
+
+        <div class="section-title">Style</div>
+        <div class="input-group">
+            <label>Bg Color</label>
+            <input type="color" id="colorBg" value="#000000">
+        </div>
+        <div class="input-group">
+            <label>Dot (Past)</label>
+            <input type="color" id="colorFilled" value="#ffffff">
+        </div>
+        <div class="input-group">
+            <label>Dot (Future)</label>
+            <input type="color" id="colorEmpty" value="#333333">
+        </div>
+        <div class="input-group">
+            <label>Dot (Current)</label>
+            <input type="color" id="colorCurrent" value="#ff6600">
+        </div>
+        <div class="input-group">
+            <label>Text Color</label>
+            <input type="color" id="colorText" value="#cccccc">
+        </div>
+
+        <div class="section-title">Automation URL</div>
+        <div class="url-container">
+            <input type="text" id="generatedURL" readonly>
+            <button id="copyURLBtn" class="copy-btn">Copy</button>
+        </div>
+
+        <button id="downloadBtn">Download Wallpaper</button>
+        <p class="hint">Adjust window to preview, but checks resolution on download/automation.</p>
+    </div>
+
+    <div class="preview-container">
+        <canvas id="lifeCanvas"></canvas>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

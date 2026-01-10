@@ -1,0 +1,136 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #000;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.control-panel {
+    width: 300px;
+    background: rgba(20, 20, 20, 0.95);
+    border-right: 1px solid #333;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+}
+
+.control-panel.hidden {
+    display: none;
+}
+
+h2 {
+    margin-top: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.section-title {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #888;
+    margin-top: 10px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 4px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.input-group label {
+    font-size: 0.8rem;
+    color: #ccc;
+}
+
+input,
+select {
+    background: #222;
+    border: 1px solid #444;
+    color: #fff;
+    padding: 8px;
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.9rem;
+}
+
+input[type="color"] {
+    height: 40px;
+    padding: 2px;
+    width: 100%;
+    cursor: pointer;
+}
+
+button {
+    background: #fff;
+    color: #000;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background 0.2s;
+    /* minimal hover effect for UI only */
+}
+
+button:hover {
+    background: #ddd;
+}
+
+.hint {
+    font-size: 0.75rem;
+    color: #666;
+    margin-top: auto;
+}
+
+.preview-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #111;
+    /* Slightly different to distinguish canvas area */
+    overflow: auto;
+    padding: 20px;
+}
+
+/* Ensure canvas does not overflow visualization area if too big, 
+   but for the actual render it will start at full size.
+   Actually, for preview purposes, we might want to scale it down using CSS transform if it's huge. 
+*/
+#lifeCanvas {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.url-container {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.url-container input {
+    flex: 1;
+    font-size: 0.75rem;
+    padding: 8px;
+    font-family: 'Space Mono', monospace;
+}
+
+.copy-btn {
+    padding: 8px 16px;
+    margin: 0;
+    white-space: nowrap;
+}
