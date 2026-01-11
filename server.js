@@ -39,6 +39,7 @@ app.get('/wallpaper', async (req, res) => {
     try {
         const launchOptions = {
             headless: "new",
+            executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || null,
             args: [
                 '--no-sandbox',
                 '--disable-setuid-sandbox',
