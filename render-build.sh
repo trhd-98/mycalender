@@ -1,9 +1,25 @@
 #!/usr/bin/env bash
 # exit on error
 set -o errexit
+set -x # Exact command tracing
 
-# Install project dependencies
-npm install
+echo "--- STARTING BUILD SCRIPT ---"
 
-# Manually install Chrome for Puppeteer to ensure it exists in the cache
-npx puppeteer browsers install chrome
+echo "Checking environment..."
+node -v
+npm -v
+
+echo "Cleaning up old cache if exists..."
+rm -rf .cache/puppeteer
+
+echo "Creating cache directory..."
+mkdir -p .cache/puppeteer
+
+echo "Installing NPM dependencies..."
+npm install --no-audit --no-fund
+
+echo "Installing Chrome for Puppeteer..."
+# Using verbose to see download progress
+npx puppeteer browsers install chrome --verbose
+
+echo "Build script completed successfully!"
