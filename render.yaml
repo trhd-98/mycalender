@@ -6,4 +6,4 @@ services:
     startCommand: npm start
     envVars:
       - key: PUPPETEER_CACHE_DIR
-        value: /opt/render/project/src/.cache/puppeteer
+        value: /opt/render/project/src/node_modules/.cache/puppeteer
