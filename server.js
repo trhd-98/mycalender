@@ -42,13 +42,8 @@ app.get('/wallpaper', async (req, res) => {
             args: [
                 '--no-sandbox',
                 '--disable-setuid-sandbox',
-                '--disable-dev-shm-usage',
-                '--disable-accelerated-2d-canvas',
-                '--no-first-run',
-                '--no-zygote',
-                '--single-process'
-            ],
-            executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || null
+                '--disable-dev-shm-usage'
+            ]
         });
         const page = await browser.newPage();
 

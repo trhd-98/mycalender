@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: dang-calendar
+    runtime: node
+    buildCommand: npm install && npx puppeteer install --cr-all
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: 18.0.0 # Recommended for Puppeteer stability
