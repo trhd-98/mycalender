@@ -15,10 +15,11 @@ rm -rf .cache/puppeteer
 echo "Creating cache directory..."
 mkdir -p .cache/puppeteer
 
-echo "Installing NPM dependencies..."
-npm install --no-audit --no-fund
+echo "Installing NPM dependencies (skipping automatic Puppeteer browser download)..."
+export PUPPETEER_SKIP_DOWNLOAD=true
+npm install --no-audit --no-fund --verbose
 
-echo "Installing Chrome for Puppeteer..."
+echo "Installing Chrome for Puppeteer (manual step)..."
 # Using verbose to see download progress
 npx puppeteer browsers install chrome --verbose
 
