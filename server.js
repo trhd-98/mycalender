@@ -58,26 +58,39 @@ app.get('/wallpaper', async (req, res) => {
         // Or simpler: set a massive viewport and take fullPage screenshot, or screenshot the canvas.
         // Canvas screenshot is cleanest.
 
+        console.log("Setting viewport...");
         await page.setViewport({ width: 3840, height: 2160, deviceScaleFactor: 1 }); // Large default viewport
-        await page.goto(url, { waitUntil: 'networkidle0' });
 
-        // Wait for canvas to be rendered (using the explicit class we added)
+        console.log(`Navigating to: ${url}`);
+        await page.goto(url, { waitUntil: 'networkidle0', timeout: 30000 });
+
+        console.log("Waiting for .render-complete...");
         try {
-            await page.waitForSelector('.render-complete', { timeout: 5000 });
+            await page.waitForSelector('.render-complete', { timeout: 10000 });
+            console.log(".render-complete found.");
         } catch (e) {
             console.log("Timeout waiting for .render-complete, proceeding anyway...");
         }
 
+        console.log("Taking screenshot of #lifeCanvas...");
         const element = await page.$('#lifeCanvas');
+        if (!element) {
+            throw new Error("Could not find #lifeCanvas on the page");
+        }
         const buffer = await element.screenshot({ type: 'png' });
 
+        console.log("Screenshot taken successfully. Sending response.");
         res.set('Content-Type', 'image/png');
         res.send(buffer);
 
     } catch (e) {
-        console.error("Error generating wallpaper:", e);
-        // Return detailed error to the client for debugging
-        res.status(500).send(`Error generating wallpaper: ${e.message}\n\nStack:\n${e.stack}`);
+        console.error("CRITICAL ERROR during wallpaper generation:", e);
+        // Clear any half-set headers and send JSON
+        res.status(500).json({
+            error: "Wallpaper generation failed",
+            message: e.message,
+            stack: e.stack
+        });
     } finally {
         if (browser) {
             await browser.close();
