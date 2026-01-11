@@ -37,14 +37,18 @@ app.get('/wallpaper', async (req, res) => {
 
     let browser;
     try {
-        browser = await puppeteer.launch({
+        const launchOptions = {
             headless: "new",
             args: [
                 '--no-sandbox',
                 '--disable-setuid-sandbox',
                 '--disable-dev-shm-usage'
             ]
-        });
+        };
+        console.log("Launching Puppeteer with options:", JSON.stringify(launchOptions));
+        console.log("PUPPETEER_EXECUTABLE_PATH:", process.env.PUPPETEER_EXECUTABLE_PATH);
+
+        browser = await puppeteer.launch(launchOptions);
         const page = await browser.newPage();
 
         // Set viewport to a large resolution (or match requested resolution) to ensure high quality render
