@@ -75,7 +75,8 @@ app.get('/wallpaper', async (req, res) => {
 
     } catch (e) {
         console.error("Error generating wallpaper:", e);
-        res.status(500).send("Error generating wallpaper");
+        // Return detailed error to the client for debugging
+        res.status(500).send(`Error generating wallpaper: ${e.message}\n\nStack:\n${e.stack}`);
     } finally {
         if (browser) {
             await browser.close();
