@@ -5,5 +5,4 @@ services:
     buildCommand: npm install
     startCommand: npm start
     envVars:
-      - key: PUPPETEER_CACHE_DIR
-        value: .puppeteer_cache
+
