@@ -47,7 +47,8 @@ app.get('/wallpaper', async (req, res) => {
             ]
         };
         console.log("Launching Puppeteer with options:", JSON.stringify(launchOptions));
-        console.log("PUPPETEER_EXECUTABLE_PATH:", process.env.PUPPETEER_EXECUTABLE_PATH);
+        console.log("PUPPETEER_CACHE_DIR:", process.env.PUPPETEER_CACHE_DIR);
+        console.log("Computed Executable Path:", puppeteer.executablePath());
 
         browser = await puppeteer.launch(launchOptions);
         const page = await browser.newPage();
