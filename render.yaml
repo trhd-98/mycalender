@@ -2,7 +2,7 @@ services:
   - type: web
     name: dang-calendar
     runtime: node
-    buildCommand: bash ./render-build.sh
+    buildCommand: npm install
     startCommand: npm start
     envVars:
       - key: PUPPETEER_CACHE_DIR
